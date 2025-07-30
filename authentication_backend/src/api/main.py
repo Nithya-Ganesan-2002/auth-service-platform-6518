@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .auth import router as auth_router, openapi_tags
 
-app = FastAPI()
+app = FastAPI(
+    title="Authentication Backend API",
+    description="Handles user registration, login, password management, and token-based authentication functionality.",
+    version="0.1.0",
+    openapi_tags=openapi_tags,
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -11,6 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+app.include_router(auth_router)
+
+@app.get("/", tags=["Health"])
 def health_check():
+    """
+    Health check endpoint for service status.
+    """
     return {"message": "Healthy"}
