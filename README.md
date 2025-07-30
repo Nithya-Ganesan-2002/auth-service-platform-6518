@@ -1,1 +1,3 @@
-# auth-service-platform-6518
+# Project Repository
+
+This is the initial README file for the project.
